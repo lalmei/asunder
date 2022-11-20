@@ -15,9 +15,12 @@ from rich.panel import Panel
 from asunder._version import version_info
 from asunder.command.rename import app as refactor
 
-app = typer.Typer(add_completion=False, invoke_without_command=True, no_args_is_help=True)
+app = typer.Typer(
+    add_completion=False, invoke_without_command=True, no_args_is_help=True
+)
 
-app.add_typer(refactor,name= "refactor")
+app.add_typer(refactor, name="refactor")
+
 
 def _set_up_logger(console: Console) -> logging.Logger:
     """
@@ -53,7 +56,12 @@ def _version_callback(value: bool) -> None:
     if value:
         console = Console()
         console.print(
-            Panel(version_info(), highlight=True, box=box.DOUBLE_EDGE, title="asunder version info")
+            Panel(
+                version_info(),
+                highlight=True,
+                box=box.DOUBLE_EDGE,
+                title="asunder version info",
+            )
         )
         raise typer.Exit()
 
@@ -61,13 +69,17 @@ def _version_callback(value: bool) -> None:
 @app.callback(invoke_without_command=True, no_args_is_help=True)
 def main(
     ctx: typer.Context,
-    dry_run : Optional[bool] = typer.Option(False, "--dry-run", help = "Show changes but do not execute them"),
+    dry_run: Optional[bool] = typer.Option(
+        False, "--dry-run", help="Show changes but do not execute them"
+    ),
     verbose: Optional[bool] = typer.Option(False, "--verbose", help="verbose mode"),
-    version: Optional[bool] = typer.Option(None, "--version", help="check model version", callback=_version_callback),
+    version: Optional[bool] = typer.Option(
+        None, "--version", help="check model version", callback=_version_callback
+    ),
 ) -> None:
     """
     Welcome to Asunder App
-    
+
     To help you refactor and break apart your code.
     \f
 

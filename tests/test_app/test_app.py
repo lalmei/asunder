@@ -40,5 +40,3 @@ def test_unknown_command() -> None:
     console.print(result.stdout)
     assert result.exit_code == 2
     assert default_help in result.stdout
-
-
