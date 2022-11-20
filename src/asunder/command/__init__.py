@@ -1,0 +1,1 @@
+from asunder.command.cli import app

@@ -6,6 +6,10 @@ authors = ["Leandro G. Almeida <leandro.g.almeida@gmail.com>"]
 readme = "README.md"
 packages = [{include = "asunder", from = "src"}]
 
+[tool.poetry.scripts]
+asunder = 'asunder.command:app'
+
+
 [tool.poetry.dependencies]
 python = "^3.10"
 rope = "^1.4.0"

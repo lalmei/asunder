@@ -13,10 +13,11 @@ from rich.logging import RichHandler
 from rich.panel import Panel
 
 from asunder._version import version_info
+from asunder.command.rename import app as refactor
 
-# typer application
 app = typer.Typer(add_completion=False, invoke_without_command=True, no_args_is_help=True)
 
+app.add_typer(refactor,name= "refactor")
 
 def _set_up_logger(console: Console) -> logging.Logger:
     """
@@ -33,7 +34,7 @@ def _set_up_logger(console: Console) -> logging.Logger:
         logger with the CLI name
 
     """
-    module_logger = logging.getLogger("recommendation-engine")
+    module_logger = logging.getLogger("asunder")
     module_logger.addHandler(RichHandler(rich_tracebacks=True, console=console))
     module_logger.setLevel(level=logging.WARNING)
 
@@ -52,7 +53,7 @@ def _version_callback(value: bool) -> None:
     if value:
         console = Console()
         console.print(
-            Panel(version_info(), highlight=True, box=box.DOUBLE_EDGE, title="recommendation-engine model version info")
+            Panel(version_info(), highlight=True, box=box.DOUBLE_EDGE, title="asunder version info")
         )
         raise typer.Exit()
 
