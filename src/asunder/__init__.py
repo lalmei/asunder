@@ -1,8 +1,7 @@
 """
 Asunder App
 """
-
 from typing import List
 from asunder.command.cli import app
+from asunder._version import __version__
 
-__all__: List[str] = ["app"]  # noqa: WPS410 (the only __variable__ we use)

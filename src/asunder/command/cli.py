@@ -61,6 +61,7 @@ def _version_callback(value: bool) -> None:
 @app.callback(invoke_without_command=True, no_args_is_help=True)
 def main(
     ctx: typer.Context,
+    dry_run : Optional[bool] = typer.Option(False, "--dry-run", help = "Show changes but do not execute them"),
     verbose: Optional[bool] = typer.Option(False, "--verbose", help="verbose mode"),
     version: Optional[bool] = typer.Option(None, "--version", help="check model version", callback=_version_callback),
 ) -> None:
@@ -89,4 +90,4 @@ def main(
         logger.setLevel(logging.DEBUG)
         logger.info("Setting verbose mode ON")
 
-    ctx.obj = {"verbose": verbose}
+    ctx.obj = {"verbose": verbose, "dry_run": dry_run}
