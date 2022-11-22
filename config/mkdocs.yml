@@ -1,0 +1,75 @@
+site_name: "Asunder"
+site_description: "CLI for refactoring python code"
+site_url: "https://github.com/lalmei/asunder"
+repo_url: "https://github.com/lalmei/asunder"
+repo_name: "asunder"
+
+docs_dir: ../docs
+site_dir: ../site
+
+theme:
+  name: material
+  custom_dir: ../docs/overrides
+  font:
+    code: Roboto Mono
+    text: Roboto
+  palette:
+    primary: indigo
+    accent: teal
+  favicon: assets/images/favicon.png # image on the browswer tab
+  features:
+    - navigation.instant # works like a single page application
+    - search.highlight
+    - toc.follow
+
+markdown_extensions:
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - attr_list
+  - admonition #
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite # highlight  ` ` code blocks (i.e. single line)
+  - pymdownx.magiclink # url are automatically parsed.
+  - pymdownx.tasklist # create a static task list
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format ""
+  - toc:
+      permalink: "¤"
+  - pymdownx.tabbed: # allows to have tabbed content
+      alternate_style: true
+  - pymdownx.snippets:
+      check_paths: true
+  - mdx_include:
+      base_path: docs
+
+extra_css:
+  - css/termynal.css
+  - css/custom.css
+  - css/mkdocstrings.css
+
+extra_javascript:
+  - https://unpkg.com/mermaid@8.4.6/dist/mermaid.min.js
+  - js/termynal.js
+  - js/custom.js
+
+plugins:
+  - search # search bar on header
+  - glightbox
+  - mkdocstrings: # parses docstrings
+      handlers:
+        python:
+          paths: [../src]
+  - gen-files: # generates the documentation from the docstring
+      scripts:
+        - scripts/gen-pages.py
+  - literate-nav: # Outline is described in nav.md in docs/ instead of this config file.
+      nav_file: nav.md
+  - section-index
+
