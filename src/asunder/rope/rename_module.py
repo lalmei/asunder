@@ -1,17 +1,13 @@
 import logging
 
 from rope.base.change import ChangeSet
+from rope.base.project import Project as RopeProject
 from rope.refactor.rename import Rename
-
-from asunder.rope.project import RopeProject
 
 logger = logging.getLogger("asunder")
 
 
-def rename(project: RopeProject, module: str, to_name: str) -> ChangeSet:
-    """
-    Rename module: --module <name> --to-name <> [--dry_run True]
-    """
-    module_resource = project.get_resource(module)
-
-    return Rename(project, module_resource).get_changes(to_name)
+def rename(rope_project: RopeProject, module: str, to_name: str) -> ChangeSet:
+    """Rename"""
+    module_resource = rope_project.get_resource(module)
+    return Rename(rope_project, module_resource).get_changes(to_name)

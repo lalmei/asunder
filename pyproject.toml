@@ -10,6 +10,12 @@ packages = [{include = "asunder", from = "src"}]
 asunder = 'asunder:app'
 
 
+[[tool.poetry.source]]
+name = "mkdocs-material-insiders"
+url = "https://github.com/squidfunk/mkdocs-material-insiders.git"
+default = false
+secondary = false
+
 [tool.poetry.dependencies]
 python = "^3.10"
 rope = "^1.4.0"

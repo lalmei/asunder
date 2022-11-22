@@ -13,10 +13,10 @@ from rich.logging import RichHandler
 from rich.panel import Panel
 
 from asunder._version import version_info
-from asunder.command.rename import app as refactor
+from asunder.command.rename_cmd import app as refactor
 
 app = typer.Typer(
-    add_completion=False, invoke_without_command=True, no_args_is_help=True
+    add_completion=True, invoke_without_command=True, no_args_is_help=True
 )
 
 app.add_typer(refactor, name="refactor")
@@ -86,7 +86,7 @@ def main(
     Parameters
     ----------
     ctx : typer.Context
-        typer context that lives throughtout model command
+        typer context that lives throughout model command
     verbose : Optional[bool]
         set logging to DEBUG , by default typer.Option(False, "--verbose", help="verbose mode")
         it is also saved in the ctx obj so it can be referred for other noisy output
