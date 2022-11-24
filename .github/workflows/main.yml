@@ -44,12 +44,13 @@ jobs:
     name: coverage
     runs-on: ubuntu-latest
     steps:
-    - name: Pull Coverage file
+    - name: Load coverage artifact
       uses: actions/download-artifact@v3
       with:
         name: coverage
     - uses: actions/checkout@master
-    - uses: paambaati/codeclimate-action@v3.2.0
+    - name: Push coverage report
+      uses: paambaati/codeclimate-action@v3.2.0
       env:
         CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
       with:
