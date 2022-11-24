@@ -34,6 +34,7 @@ jobs:
     - name: Run Tests
       run: |
         make test
+    - name: Persist Coverage
     - uses: actions/upload-artifact@v3
       with:
         name: coverage
@@ -44,11 +45,11 @@ jobs:
     name: coverage
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@master
     - name: Load coverage artifact
       uses: actions/download-artifact@v3
       with:
         name: coverage
-    - uses: actions/checkout@master
     - name: Push coverage report
       uses: paambaati/codeclimate-action@v3.2.0
       env:
