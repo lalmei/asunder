@@ -2,8 +2,9 @@
 from pathlib import Path
 
 import mkdocs_gen_files
+from mkdocs_gen_files.nav import Nav
 
-nav = mkdocs_gen_files.Nav()
+nav: Nav = mkdocs_gen_files.Nav()  # type: ignore
 
 # loop over everything in the src folder
 for path in sorted(Path("src").rglob("*.py")):

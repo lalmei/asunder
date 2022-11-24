@@ -13,7 +13,7 @@ def test_version() -> None:
     """Test version call."""
     result = runner.invoke(app, ["--version"], input="")
     console.print(result.stdout)
-    assert "pra version info" in result.stdout.split("\n")[0]
+    assert "asunder version info" in result.stdout.split("\n")[0]
     assert result.exit_code == 0
 
 

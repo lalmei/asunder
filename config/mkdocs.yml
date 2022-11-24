@@ -46,29 +46,17 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.snippets:
       check_paths: true
-  - mdx_include:
-      base_path: docs
 
-extra_css:
-  - css/termynal.css
-  - css/custom.css
-  - css/mkdocstrings.css
-
-extra_javascript:
-  - https://unpkg.com/mermaid@8.4.6/dist/mermaid.min.js
-  - js/termynal.js
-  - js/custom.js
 
 plugins:
   - search # search bar on header
-  - glightbox
   - mkdocstrings: # parses docstrings
       handlers:
         python:
           paths: [../src]
   - gen-files: # generates the documentation from the docstring
       scripts:
-        - scripts/gen-pages.py
+        - ../scripts/gen-pages.py
   - literate-nav: # Outline is described in nav.md in docs/ instead of this config file.
       nav_file: nav.md
   - section-index
