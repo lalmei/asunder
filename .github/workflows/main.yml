@@ -45,11 +45,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Pull Coverage file
-        uses: actions/download-artifact@v3
-        with:
-          name: coverage
+      uses: actions/download-artifact@v3
+      with:
+        name: coverage
     - uses: actions/checkout@master
     - uses: paambaati/codeclimate-action@v3.2.0
       env:
         CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
-      coverage_cmd : poetry run coverage html --rcfile=./config/coverage_unit.in
+      with:
+        coverageCommand: poetry run coverage html --rcfile=./config/coverage_unit.in
