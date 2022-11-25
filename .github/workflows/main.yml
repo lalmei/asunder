@@ -24,7 +24,7 @@ jobs:
       uses: abatilo/actions-poetry@v2
       with:
         poetry-version: ${{ matrix.poetry-version }}
-        cache: 'poetry'
+        cache: 'poetry-version'
     
     - name: Install Dependencies
       run: |
@@ -54,3 +54,5 @@ jobs:
       uses: paambaati/codeclimate-action@v3.2.0
       env:
         CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
+      coverageLocations: |
+        ${{github.workspace}}/.coverage/:coverage.py
