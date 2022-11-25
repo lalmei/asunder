@@ -59,3 +59,4 @@ jobs:
       with:
         coverageLocations: |
           ${{github.workspace}}/.coverage/:coverage.py
+          ${{github.workspace}}/site/coverage/:coverage.py
