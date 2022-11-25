@@ -54,5 +54,6 @@ jobs:
       uses: paambaati/codeclimate-action@v3.2.0
       env:
         CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
-      coverageLocations: |
-        ${{github.workspace}}/.coverage/:coverage.py
+      with:
+        coverageLocations: |
+          ${{github.workspace}}/.coverage/:coverage.py
