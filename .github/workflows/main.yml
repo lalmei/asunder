@@ -38,7 +38,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: coverage
-        path: .coverage
+        path: site/coverage/
 
   coverage:
     needs: [ test ]
@@ -54,5 +54,3 @@ jobs:
       uses: paambaati/codeclimate-action@v3.2.0
       env:
         CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
-      with:
-        coverageCommand: poetry run coverage html --rcfile=./config/coverage_unit.in
