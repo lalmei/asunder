@@ -39,7 +39,7 @@ jobs:
       with:
         name: coverage
         path: | 
-          site/coverage/
+          coverage.json
           .coverage
 
   coverage:
@@ -59,4 +59,4 @@ jobs:
       with:
         coverageLocations: |
           ${{github.workspace}}/.coverage/:coverage.py
-          ${{github.workspace}}/site/coverage/:coverage.py
+          ${{github.workspace}}/coverage.json/:coverage.py
