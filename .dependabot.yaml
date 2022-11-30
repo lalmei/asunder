@@ -1,0 +1,15 @@
+version: 2 
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+    assignees:
+      - "octocat"
+    reviewers:
+      - "lalmei"
+    labels:
+      - "dependencies"
+      - "python"
+    open-pull-requests-limit: 5
+    
