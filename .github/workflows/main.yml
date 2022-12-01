@@ -41,7 +41,6 @@ jobs:
         path: | 
           coverage.xml
           .coverage
-          site/coverage
 
   coverage:
     needs: [ test ]
@@ -62,4 +61,3 @@ jobs:
         coverageLocations: |
           ${{github.workspace}}/.coverage/:coverage.py
           ${{github.workspace}}/coverage.xml/:coverage.py
-          ${{github.workspace}}/site/coverage/:coverage.py
