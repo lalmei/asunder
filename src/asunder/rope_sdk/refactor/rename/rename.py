@@ -4,6 +4,8 @@ from rope.base.change import ChangeSet
 from rope.base.project import Project as RopeProject
 from rope.refactor.rename import Rename
 
+from asunder.rope_sdk.find import find_definition_in_resource
+
 logger = logging.getLogger("asunder")
 
 
