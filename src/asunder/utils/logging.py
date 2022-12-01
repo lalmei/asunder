@@ -23,7 +23,7 @@ def _set_up_logger(console: Optional[Console] = None) -> Logger:
     if not console:
         console = Console()
     module_logger = getLogger("asunder")
-    
+
     rich_handler = RichHandler(rich_tracebacks=True, console=console)
     rich_handler.set_name("rich")
     module_logger.addHandler(rich_handler)
@@ -46,7 +46,7 @@ def get_logger_console(
             handler: RichHandler = cast(RichHandler, logger.handlers[0])
             console = handler.console
             return logger, console
-        
+
     logger = _set_up_logger(console)
     logger.debug("Setting up rich log handler")
 
