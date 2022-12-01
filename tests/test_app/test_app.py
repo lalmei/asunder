@@ -21,7 +21,9 @@ def test_parse_args() -> None:
     """
     test verbose mode
     """
-    verbose_check = re.compile(r"\[[\w*\S*\s*]*\] (INFO     Setting verbose mode ON)")
+    verbose_check = re.compile(
+        r"\[[\w*\S*\s*]*\] (INFO     Setting verbose mode ON)"
+    )
 
     result = runner.invoke(app, ["--verbose"], input="")
     console.print(result.stdout)

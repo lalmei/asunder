@@ -1,6 +1,7 @@
 # @app.command()
 # def move(ctx: Context,
-#     path: Path = typer.Option(Path.cwd() / "src", help="path to package source code"),
+#     path: Path = typer.Option(Path.cwd() / "src",
+#               help="path to package source code"),
 #     module: str = typer.Argument(
 #         "", help='full module name to be renamed, e.g. "package.module"'):
 

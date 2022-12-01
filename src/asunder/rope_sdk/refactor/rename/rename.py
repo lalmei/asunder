@@ -9,7 +9,9 @@ from asunder.rope_sdk.find import find_definition_in_resource
 logger = logging.getLogger("asunder")
 
 
-def rename_module(rope_project: RopeProject, module: str, to_name: str) -> ChangeSet:
+def rename_module(
+    rope_project: RopeProject, module: str, to_name: str
+) -> ChangeSet:
     module_resource = rope_project.get_resource(module)
     return Rename(rope_project, module_resource).get_changes(to_name)
 

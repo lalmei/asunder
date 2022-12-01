@@ -18,7 +18,9 @@ logger = logging.getLogger("asunder")
 @app.command(no_args_is_help=True)
 def rename(
     ctx: Context,
-    path: Path = typer.Option(Path.cwd() / "src", help="path to package source code"),
+    path: Path = typer.Option(
+        Path.cwd() / "src", help="path to package source code"
+    ),
     module: str = typer.Argument(
         "", help='module where renaming will take placed, e.g. "package.module"'
     ),

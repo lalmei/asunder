@@ -51,9 +51,14 @@ def main(
     dry_run: Optional[bool] = typer.Option(
         False, "--dry-run", help="Show changes but do not execute them"
     ),
-    verbose: Optional[bool] = typer.Option(False, "--verbose", help="verbose mode"),
+    verbose: Optional[bool] = typer.Option(
+        False, "--verbose", help="verbose mode"
+    ),
     version: Optional[bool] = typer.Option(
-        None, "--version", help="check model version", callback=_version_callback
+        None,
+        "--version",
+        help="check model version",
+        callback=_version_callback,
     ),
 ) -> None:
     """

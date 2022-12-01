@@ -9,7 +9,9 @@ logger = logging.getLogger("asunder")
 
 
 class Project:
-    def __init__(self, path: Path = Path.cwd(), console: Console = Console()) -> None:
+    def __init__(
+        self, path: Path = Path.cwd(), console: Console = Console()
+    ) -> None:
 
         self.rope_project = RopeProject(str(path / "src"))
         self.console = console

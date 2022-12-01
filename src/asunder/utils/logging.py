@@ -29,7 +29,9 @@ def _set_up_logger(console: Optional[Console] = None) -> Logger:
     return module_logger
 
 
-def get_logger_console(console: Optional[Console] = None) -> tuple[Logger, Console]:
+def get_logger_console(
+    console: Optional[Console] = None,
+) -> tuple[Logger, Console]:
 
     if not console:
         console = Console()
@@ -39,7 +41,9 @@ def get_logger_console(console: Optional[Console] = None) -> tuple[Logger, Conso
     if len(logger.handlers) > 0:
         handler: RichHandler = cast(RichHandler, logger.handlers[0])
         console = handler.console
-        print("handler names = ", [handle.__dict__ for handle in logger.handlers])
+        print(
+            "handler names = ", [handle.__dict__ for handle in logger.handlers]
+        )
     else:
         logger = _set_up_logger(console)
         logger.debug("Setting up rich log handler")
