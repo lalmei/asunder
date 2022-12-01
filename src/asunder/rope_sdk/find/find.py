@@ -1,3 +1,5 @@
+from functools import partial
+
 from rope.base.project import Project as RopeProject
 from rope.refactor.occurrences import Finder
 

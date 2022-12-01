@@ -41,6 +41,7 @@ jobs:
         path: | 
           coverage.xml
           .coverage
+          site/coverage
 
   coverage:
     needs: [ test ]
@@ -57,7 +58,8 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
       with:
-        prefix: src/
+        prefix: ${{github.workspace}}
         coverageLocations: |
           ${{github.workspace}}/.coverage/:coverage.py
           ${{github.workspace}}/coverage.xml/:coverage.py
+          ${{github.workspace}}/site/coverage/:coverage.py
