@@ -42,6 +42,6 @@ def get_logger_console(console: Optional[Console] = None) -> tuple[Logger, Conso
         print("handler names = ", [handle.__dict__ for handle in logger.handlers])
     else:
         logger = _set_up_logger(console)
-        logger.warning("no rich handlers in logger")
+        logger.debug("Setting up rich log handler")
 
     return logger, console

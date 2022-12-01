@@ -22,7 +22,9 @@ def rename(
     module: str = typer.Argument(
         "", help='module where renaming will take placed, e.g. "package.module"'
     ),
-    old_name: Optional[str] = typer.Option("", help= "old name of module/class/attribute"),
+    old_name: Optional[str] = typer.Option(
+        "", help="old name of module/class/attribute"
+    ),
     name: str = typer.Argument("", help="new module/class/attribute name"),
 ) -> None:
 
