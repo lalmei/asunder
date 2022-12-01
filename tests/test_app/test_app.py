@@ -21,9 +21,7 @@ def test_parse_args() -> None:
     """
     test verbose mode
     """
-    verbose_check = re.compile(
-        r"\[[\w*\S*\s*]*\] (INFO     Setting verbose mode ON)"
-    )
+    verbose_check = re.compile(r"\[[\w*\W*]*\] (INFO     Setting verbose mode ON)")
 
     result = runner.invoke(app, ["--verbose"], input="")
     console.print(result.stdout)
@@ -35,7 +33,7 @@ def test_parse_args_second() -> None:
     """
     test verbose mode
     """
-    verbose_check = re.compile(r"\s*(INFO     Setting verbose mode ON)")
+    verbose_check = re.compile(r"\w* (INFO     Setting verbose mode ON)")
 
     result = runner.invoke(app, ["--verbose", "refactor", "rename"], input="")
     console.print(result.stdout)
@@ -60,5 +58,3 @@ def test_import_main() -> None:
     """
     test a wrong command
     """
-
-    import asunder.__main__

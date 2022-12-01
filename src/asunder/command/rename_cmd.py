@@ -1,5 +1,4 @@
 import logging
-import os
 from pathlib import Path
 from typing import Optional
 
@@ -19,7 +18,7 @@ logger = logging.getLogger("asunder")
 def rename(
     ctx: Context,
     path: Path = typer.Option(Path.cwd(), help="path to package source code"),
-    module: str = typer.Option(
+    module: Path = typer.Option(
         "",
         help='module where renaming will take placed, e.g. "package.module"',
     ),
@@ -30,7 +29,7 @@ def rename(
 ) -> None:
 
     if not old_name:
-        old_name = module
+        old_name = str(module)
     dry_run = ctx.obj.get("dry_run", True)
 
     logger, console = get_logger_console()
@@ -38,8 +37,7 @@ def rename(
     project = Project(path=path, console=console)
 
     # module to folder
-    module = os.path.join(*module.split("."))
-    new_name = os.path.join(*new_name.split("."))
+    # module = os.path.join(*module.split("."))
 
     logger.info("Calculating Changes")
     # compute changes needed
