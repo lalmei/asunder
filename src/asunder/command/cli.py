@@ -9,7 +9,6 @@ from typing import Optional
 import typer
 from rich import box
 from rich.console import Console
-from rich.logging import RichHandler
 from rich.panel import Panel
 
 from asunder._version import version_info

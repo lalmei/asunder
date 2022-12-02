@@ -11,6 +11,7 @@ end_of_line = lf
 
 [*.md]
 trim_trailing_whitespace = false
+indent_size = 2
 
 [Makefile]
 indent_style = tab

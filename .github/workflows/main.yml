@@ -57,7 +57,7 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
       with:
-        prefix: src/
+        prefix: ${{github.workspace}}
         coverageLocations: |
           ${{github.workspace}}/.coverage/:coverage.py
           ${{github.workspace}}/coverage.xml/:coverage.py

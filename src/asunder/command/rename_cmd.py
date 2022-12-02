@@ -1,5 +1,4 @@
 import logging
-import os
 from pathlib import Path
 from typing import Optional
 
@@ -18,33 +17,31 @@ logger = logging.getLogger("asunder")
 @app.command(no_args_is_help=True)
 def rename(
     ctx: Context,
-    path: Path = typer.Option(
-        Path.cwd() / "src", help="path to package source code"
-    ),
-    module: str = typer.Argument(
-        "", help='module where renaming will take placed, e.g. "package.module"'
+    path: Path = typer.Option(Path.cwd(), help="path to package source code"),
+    module: Path = typer.Option(
+        "",
+        help='module where renaming will take placed, e.g. "package.module"',
     ),
     old_name: Optional[str] = typer.Option(
         "", help="old name of module/class/attribute"
     ),
-    name: str = typer.Argument("", help="new module/class/attribute name"),
+    new_name: str = typer.Option("", help="new module/class/attribute name"),
 ) -> None:
 
     if not old_name:
-        old_name = module
+        old_name = str(module)
     dry_run = ctx.obj.get("dry_run", True)
 
     logger, console = get_logger_console()
 
-    project = Project(path=Path.cwd(), console=console)
+    project = Project(path=path, console=console)
 
     # module to folder
-    module = os.path.join(*module.split("."))
-    name = os.path.join(*name.split("."))
+    # module = os.path.join(*module.split("."))
 
     logger.info("Calculating Changes")
     # compute changes needed
-    changes = rename_changes(project.rope_project, module, old_name, name)
+    changes = rename_changes(project.rope_project, module, old_name, new_name)
 
     if not dry_run:
         logger.info("Perfoming  Changes")

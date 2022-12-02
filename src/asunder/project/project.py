@@ -13,7 +13,7 @@ class Project:
         self, path: Path = Path.cwd(), console: Console = Console()
     ) -> None:
 
-        self.rope_project = RopeProject(str(path / "src"))
+        self.rope_project = RopeProject(str(path))
         self.console = console
 
     def perform_changes(self, changes: ChangeSet, dry_run: bool) -> None:

@@ -21,11 +21,21 @@ def test_parse_args() -> None:
     """
     test verbose mode
     """
-    verbose_check = re.compile(
-        r"\[[\w*\S*\s*]*\] (INFO     Setting verbose mode ON)"
-    )
+    verbose_check = re.compile(r"\[[\w*\W*]*\] (INFO     Setting verbose mode ON)")
 
     result = runner.invoke(app, ["--verbose"], input="")
+    console.print(result.stdout)
+    assert result.exit_code == 0
+    assert verbose_check.search(result.stdout, 0)
+
+
+def test_parse_args_second() -> None:
+    """
+    test verbose mode
+    """
+    verbose_check = re.compile(r"\w* (INFO     Setting verbose mode ON)")
+
+    result = runner.invoke(app, ["--verbose", "refactor", "rename"], input="")
     console.print(result.stdout)
     assert result.exit_code == 0
     assert verbose_check.search(result.stdout, 0)
@@ -42,3 +52,9 @@ def test_unknown_command() -> None:
     console.print(result.stdout)
     assert result.exit_code == 2
     assert default_help in result.stdout
+
+
+def test_import_main() -> None:
+    """
+    test a wrong command
+    """

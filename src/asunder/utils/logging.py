@@ -23,7 +23,10 @@ def _set_up_logger(console: Optional[Console] = None) -> Logger:
     if not console:
         console = Console()
     module_logger = getLogger("asunder")
-    module_logger.addHandler(RichHandler(rich_tracebacks=True, console=console))
+
+    rich_handler = RichHandler(rich_tracebacks=True, console=console)
+    rich_handler.set_name("rich")
+    module_logger.addHandler(rich_handler)
     module_logger.setLevel(level=WARNING)
 
     return module_logger
@@ -39,13 +42,12 @@ def get_logger_console(
     logger = getLogger("asunder")
 
     if len(logger.handlers) > 0:
-        handler: RichHandler = cast(RichHandler, logger.handlers[0])
-        console = handler.console
-        print(
-            "handler names = ", [handle.__dict__ for handle in logger.handlers]
-        )
-    else:
-        logger = _set_up_logger(console)
-        logger.debug("Setting up rich log handler")
+        if logger.handlers[0].get_name() == "rich":
+            handler: RichHandler = cast(RichHandler, logger.handlers[0])
+            console = handler.console
+            return logger, console
+
+    logger = _set_up_logger(console)
+    logger.debug("Setting up rich log handler")
 
     return logger, console
