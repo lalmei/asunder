@@ -1,6 +1,7 @@
 import logging
 from pathlib import Path
 
+from git import Repo
 from rich.console import Console
 from rope.base.change import ChangeSet
 from rope.base.project import Project as RopeProject
@@ -15,6 +16,7 @@ class Project:
 
         self.rope_project = RopeProject(str(path))
         self.console = console
+        self.repo = Repo(str(path))
 
     def perform_changes(self, changes: ChangeSet, dry_run: bool) -> None:
 

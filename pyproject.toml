@@ -21,6 +21,8 @@ python = "^3.10"
 rope = "^1.4.0"
 typer = "^0.7.0"
 rich = "^12.6.0"
+radon = "^5.1.0"
+gitpython = "^3.1.29"
 
 
 [tool.poetry.group.dev.dependencies]
