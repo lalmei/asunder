@@ -29,7 +29,7 @@ include make_cmds/build.mk
 ##############
 
 .PHONY: bump-patch
-bump-patch: ## Bump the patch version (_._.X) everywhere. 
+bump-patch: ## Bump the patch version (_._.X) everywhere.
 	@$(call i, Bumping the patch number)
 	poetry run bump2version patch --allow-dirty --verbose --config-file config/.bumpversion.cfg
 
