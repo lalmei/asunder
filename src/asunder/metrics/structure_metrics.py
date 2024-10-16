@@ -14,7 +14,7 @@ from asunder.metrics.process_metrics import (
 
 
 class MethodMetrics(BaseModel):
-    commits: List[str] = Field(default_factory=list)
+    commits: list[str] = Field(default_factory=list)
     authors: Set[str] = Field(default_factory=set)
     complexity: int = 0
     length: int = 0
@@ -29,7 +29,7 @@ class MethodMetrics(BaseModel):
 
 
 class ClassMetrics(BaseModel):
-    commits: List[str] = Field(default_factory=list)
+    commits: list[str] = Field(default_factory=list)
     authors: Set[str] = Field(default_factory=set)
     methods: Dict[str, MethodMetrics] = Field(default_factory=dict)
     change_set: ChangeSetMetric = Field(default_factory=ChangeSetMetric)
@@ -43,7 +43,7 @@ class ClassMetrics(BaseModel):
 
 
 class FileMetrics(BaseModel):
-    commits: List[str] = Field(default_factory=list)
+    commits: list[str] = Field(default_factory=list)
     authors: Set[str] = Field(default_factory=set)
     change_set: ChangeSetMetric = Field(default_factory=ChangeSetMetric)
     code_churn: CodeChurnMetric = Field(default_factory=CodeChurnMetric)

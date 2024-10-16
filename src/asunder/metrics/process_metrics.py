@@ -1,7 +1,7 @@
 from abc import abstractmethod
 
 # from pydantic import BaseModel, Field
-from typing import Dict
+from typing import Dict, Protocol, Any
 
 
 # Base Metric class with Pydantic
@@ -9,15 +9,12 @@ class Metric(Protocol):
     def __init__(self, name):
         self.name = name
 
-    @abstractmethod
     def calculate(self, **kwargs):
         pass
 
-    @abstractmethod
     def update(self, **kwargs):
         pass
 
-    @abstractmethod
     def reset(self):
         pass
 
@@ -57,7 +54,7 @@ class CommentDensityMetric(Metric):
         self.total_lines = 0
 
 
-class ChangeSetMetric(BaseMetric):
+class ChangeSetMetric(Metric):
     name: str = "change_set"
 
     def calculate(self, data: Dict[str, Any]) -> float:
@@ -65,7 +62,7 @@ class ChangeSetMetric(BaseMetric):
         return data.get("change_set_size", 0)
 
 
-class CodeChurnMetric(BaseMetric):
+class CodeChurnMetric(Metric):
     name: str = "code_churn"
 
     def calculate(self, data: Dict[str, Any]) -> float:
@@ -75,7 +72,7 @@ class CodeChurnMetric(BaseMetric):
         return additions + deletions
 
 
-class CommitsCountMetric(BaseMetric):
+class CommitsCountMetric(Metric):
     name: str = "commits_count"
 
     def calculate(self, data: Dict[str, Any]) -> float:
@@ -83,7 +80,7 @@ class CommitsCountMetric(BaseMetric):
         return len(data.get("commits", []))
 
 
-class ContributorsCountMetric(BaseMetric):
+class ContributorsCountMetric(Metric):
     name: str = "contributors_count"
 
     def calculate(self, data: Dict[str, Any]) -> float:
@@ -91,7 +88,7 @@ class ContributorsCountMetric(BaseMetric):
         return len(set(data.get("authors", [])))
 
 
-class ContributorsExperienceMetric(BaseMetric):
+class ContributorsExperienceMetric(Metric):
     name: str = "contributors_experience"
 
     def calculate(self, data: Dict[str, Any]) -> float:
@@ -104,7 +101,7 @@ class ContributorsExperienceMetric(BaseMetric):
         return total_commits / num_contributors if num_contributors > 0 else 0
 
 
-class HunksCountMetric(BaseMetric):
+class HunksCountMetric(Metric):
     name: str = "hunks_count"
 
     def calculate(self, data: Dict[str, Any]) -> float:
@@ -112,7 +109,7 @@ class HunksCountMetric(BaseMetric):
         return data.get("hunks_count", 0)
 
 
-class LinesCountMetric(BaseMetric):
+class LinesCountMetric(Metric):
     name: str = "lines_count"
 
     def calculate(self, data: Dict[str, Any]) -> float:
@@ -120,9 +117,13 @@ class LinesCountMetric(BaseMetric):
         return data.get("lines_count", 0)
 
 
-class BugFixingCommentsMetric(BaseMetric):
+class BugFixingCommentsMetric(Metric):
     name: str = "bug_fixing_comments"
 
     def calculate(self, data: Dict[str, Any]) -> float:
         # Counting comments or commit messages that indicate a bug fix
-        return sum(1 for comment in data.get("comments", []) if "fix" in comment.lower() or "bug" in comment.lower())
+        return sum(
+            1
+            for comment in data.get("comments", [])
+            if "fix" in comment.lower() or "bug" in comment.lower()
+        )

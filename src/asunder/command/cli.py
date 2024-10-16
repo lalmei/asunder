@@ -15,6 +15,7 @@ from rich.panel import Panel
 from asunder._version import version_info
 from asunder.command.analyze import app as analyze
 from asunder.command.report import app as report
+from asunder.command.extract import app as extract
 
 from asunder.utils.logging import get_logger_console
 

@@ -18,6 +18,7 @@ def extract_repo_data(repo_path: str, since_date, to_date) -> RepoMetrics:
         for file in commit.modified_files:
             if file.filename.endswith(".py"):
                 file_path = path.normpath(path.join(repo_path, file.filename))
+                repo_name = path.basename(path)
                 submodule = path.dirname(file_path)
                 module = path.basename(path.dirname(submodule))
                 repo_data.modules.setdefault(repo_name, RepoMetrics())
