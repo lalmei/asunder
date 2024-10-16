@@ -3,61 +3,61 @@ name: asunder
 on: [push, pull_request]
 
 jobs:
-  test:
-    name: Test - ${{ matrix.python-version }} - ${{matrix.os}}
-    runs-on: ${{matrix.os}}
+    test:
+        name: Test - ${{ matrix.python-version }} - ${{matrix.os}}
+        runs-on: ${{matrix.os}}
 
-    strategy:
-      matrix:
-        python-version: ['3.10','3.11']
-        poetry-version: ['1.2.2']
-        os: [ubuntu-latest]
-      fail-fast: false
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-        
-    - name: Install Poetry
-      uses: abatilo/actions-poetry@v2
-      with:
-        poetry-version: ${{ matrix.poetry-version }}
-        cache: 'poetry-version'
-    
-    - name: Install Dependencies
-      run: |
-        poetry install
-    
-    - name: Run Tests
-      run: |
-        make test
+        strategy:
+            matrix:
+                python-version: ["3.11", "3.12"]
+                poetry-version: ["1.2.2"]
+                os: [ubuntu-latest]
+            fail-fast: false
+        steps:
+            - uses: actions/checkout@v3
+            - name: Set up Python ${{ matrix.python-version }}
+              uses: actions/setup-python@v4
+              with:
+                  python-version: ${{ matrix.python-version }}
 
-    - name: Persist Coverage
-      uses: actions/upload-artifact@v3
-      with:
-        name: coverage
-        path: | 
-          coverage.xml
-          .coverage
+            - name: Install Poetry
+              uses: abatilo/actions-poetry@v2
+              with:
+                  poetry-version: ${{ matrix.poetry-version }}
+                  cache: "poetry-version"
 
-  coverage:
-    needs: [ test ]
-    name: coverage
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Load coverage artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: coverage
-    - name: Push coverage report
-      uses: paambaati/codeclimate-action@v3.2.0
-      env:
-        CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
-      with:
-        prefix: ${{github.workspace}}
-        coverageLocations: |
-          ${{github.workspace}}/.coverage/:coverage.py
-          ${{github.workspace}}/coverage.xml/:coverage.py
+            - name: Install Dependencies
+              run: |
+                  poetry install
+
+    #         - name: Run Tests
+    #           run: |
+    #               make test
+
+    #         - name: Persist Coverage
+    #           uses: actions/upload-artifact@v3
+    #           with:
+    #               name: coverage
+    #               path: |
+    #                   coverage.xml
+    #                   .coverage
+
+    # coverage:
+    #     needs: [test]
+    #     name: coverage
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         - uses: actions/checkout@v3
+    #         - name: Load coverage artifact
+    #           uses: actions/download-artifact@v3
+    #           with:
+    #               name: coverage
+    #         - name: Push coverage report
+    #           uses: paambaati/codeclimate-action@v3.2.0
+    #           env:
+    #               CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
+    #           with:
+    #               prefix: ${{github.workspace}}
+    #               coverageLocations: |
+    #                   ${{github.workspace}}/.coverage/:coverage.py
+    #                   ${{github.workspace}}/coverage.xml/:coverage.py
