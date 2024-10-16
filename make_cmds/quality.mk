@@ -13,7 +13,7 @@ check-format: ## Check style formatting.
 .PHONY: format
 format: ## Fix formatting with isort & black. This updates files.
 	@$(call i, Formatting code)
-	poetry run ruff format --fix --config=./config/ruff.toml ${src.python} $(test.python) $(template.python) $(scripts.python)
+	poetry run ruff format --config=./config/ruff.toml ${src.python} $(test.python) $(template.python) $(scripts.python)
 
 .PHONY: check-lint
 check-lint: ## Check code for lint errors.
@@ -23,7 +23,7 @@ check-lint: ## Check code for lint errors.
 .PHONY: lint
 lint: ## Check code for lint errors.
 	@$(call i, Running the linter)
-	poetry run ruff check --fix --config=./config/ruff.toml ${src.python} $(test.python) $(template.python) $(scripts.python)
+	poetry run ruff check  --config=./config/ruff.toml ${src.python} $(test.python) $(template.python) $(scripts.python) --fix --unsafe-fixes
 
 
 .PHONY: check-types
