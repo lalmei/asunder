@@ -35,7 +35,6 @@ def _set_up_logger(console: Optional[Console] = None) -> Logger:
 def get_logger_console(
     console: Optional[Console] = None,
 ) -> tuple[Logger, Console]:
-
     if not console:
         console = Console()
 

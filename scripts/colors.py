@@ -15,6 +15,7 @@ endef
 ```
 
 """
+
 import sys
 
 INFO = "\033[96m"

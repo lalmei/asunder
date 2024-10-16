@@ -3,6 +3,7 @@ A typer CLI application.
 
 It uses rich for object printing format, along with hydra for configuration
 """
+
 import logging
 from typing import Optional
 
@@ -12,14 +13,16 @@ from rich.console import Console
 from rich.panel import Panel
 
 from asunder._version import version_info
-from asunder.command.rename_cmd import app as refactor
+from asunder.command.analyze import app as analyze
+from asunder.command.report import app as report
+
 from asunder.utils.logging import get_logger_console
 
-app = typer.Typer(
-    add_completion=True, invoke_without_command=True, no_args_is_help=True
-)
+app = typer.Typer(add_completion=True, invoke_without_command=True, no_args_is_help=True)
 
-app.add_typer(refactor, name="refactor")
+app.add_typer(analyze, name="analyze")
+app.add_typer(report, name="report")
+app.add_typer(extract, name="extract")
 
 
 def _version_callback(value: bool) -> None:
@@ -47,12 +50,8 @@ def _version_callback(value: bool) -> None:
 @app.callback(invoke_without_command=True, no_args_is_help=True)
 def main(
     ctx: typer.Context,
-    dry_run: Optional[bool] = typer.Option(
-        False, "--dry-run", help="Show changes but do not execute them"
-    ),
-    verbose: Optional[bool] = typer.Option(
-        False, "--verbose", help="verbose mode"
-    ),
+    dry_run: Optional[bool] = typer.Option(False, "--dry-run", help="Show changes but do not execute them"),
+    verbose: Optional[bool] = typer.Option(False, "--verbose", help="verbose mode"),
     version: Optional[bool] = typer.Option(
         None,
         "--version",

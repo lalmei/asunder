@@ -1,4 +1,5 @@
 """Configuration to point to pytest fixtures."""
+
 import shutil
 from pathlib import Path
 
