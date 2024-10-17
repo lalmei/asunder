@@ -1,5 +1,7 @@
 from radon import cc_visit
 
+from asunder.metrics.process_metrics import Metric
+
 
 class CycleComplexityMetric(Metric):
     name: str = "complexity"

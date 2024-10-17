@@ -30,34 +30,34 @@ jobs:
               run: |
                   poetry install
 
-    #         - name: Run Tests
-    #           run: |
-    #               make test
+            - name: Run Tests
+              run: |
+                  make test
 
-    #         - name: Persist Coverage
-    #           uses: actions/upload-artifact@v3
-    #           with:
-    #               name: coverage
-    #               path: |
-    #                   coverage.xml
-    #                   .coverage
+            - name: Persist Coverage
+              uses: actions/upload-artifact@v3
+              with:
+                  name: coverage
+                  path: |
+                      coverage.xml
+                      .coverage
 
-    # coverage:
-    #     needs: [test]
-    #     name: coverage
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - uses: actions/checkout@v3
-    #         - name: Load coverage artifact
-    #           uses: actions/download-artifact@v3
-    #           with:
-    #               name: coverage
-    #         - name: Push coverage report
-    #           uses: paambaati/codeclimate-action@v3.2.0
-    #           env:
-    #               CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
-    #           with:
-    #               prefix: ${{github.workspace}}
-    #               coverageLocations: |
-    #                   ${{github.workspace}}/.coverage/:coverage.py
-    #                   ${{github.workspace}}/coverage.xml/:coverage.py
+    coverage:
+        needs: [test]
+        name: coverage
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Load coverage artifact
+              uses: actions/download-artifact@v3
+              with:
+                  name: coverage
+            - name: Push coverage report
+              uses: paambaati/codeclimate-action@v3.2.0
+              env:
+                  CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
+              with:
+                  prefix: ${{github.workspace}}
+                  coverageLocations: |
+                      ${{github.workspace}}/.coverage/:coverage.py
+                      ${{github.workspace}}/coverage.xml/:coverage.py

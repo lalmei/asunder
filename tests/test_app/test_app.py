@@ -35,7 +35,7 @@ def test_parse_args_second() -> None:
     """
     verbose_check = re.compile(r"\w* (INFO     Setting verbose mode ON)")
 
-    result = runner.invoke(app, ["--verbose", "refactor", "rename"], input="")
+    result = runner.invoke(app, ["--verbose", "extract"], input="")
     console.print(result.stdout)
     assert result.exit_code == 0
     assert verbose_check.search(result.stdout, 0)

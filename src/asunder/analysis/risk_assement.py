@@ -176,59 +176,6 @@ class HierarchicalRiskAnalyzer:
         solo_author_bonus = (len(authors) == 1) * 2
         return (commits * 0.5) + solo_author_bonus + (complexity * 0.1) + (length * 0.05)
 
-    def generate_hierarchical_data(self):
-        def create_node(name, full_path, risk_score, children=[]):
-            return {
-                "name": name,
-                "full_path": full_path,
-                "risk_score": risk_score,
-                "children": children,
-            }
-
-        hierarchical_data = []
-
-        for submodule, submodule_data in self.risk_data.items():
-            submodule_node = create_node(
-                os.path.basename(submodule),
-                submodule,
-                self.calculate_risk_score(submodule_data["commits"], submodule_data["authors"]),
-            )
-
-            for file_path, file_data in submodule_data["files"].items():
-                file_node = create_node(
-                    os.path.basename(file_path),
-                    file_path,
-                    self.calculate_risk_score(file_data["commits"], file_data["authors"]),
-                )
-
-                for class_name, class_data in file_data["classes"].items():
-                    class_node = create_node(
-                        class_name,
-                        f"{file_path}::{class_name}",
-                        self.calculate_risk_score(class_data["commits"], class_data["authors"]),
-                    )
-
-                    for method_name, method_data in class_data["methods"].items():
-                        method_node = create_node(
-                            method_name,
-                            f"{file_path}::{class_name}::{method_name}",
-                            self.calculate_risk_score(
-                                method_data["commits"],
-                                method_data["authors"],
-                                method_data["complexity"],
-                                method_data["length"],
-                            ),
-                        )
-                        class_node["children"].append(method_node)
-
-                    file_node["children"].append(class_node)
-
-                submodule_node["children"].append(file_node)
-
-            hierarchical_data.append(submodule_node)
-
-        return hierarchical_data
-
     def generate_risk_report(self):
         report = {"submodules": [], "files": [], "classes": [], "methods": []}
 
