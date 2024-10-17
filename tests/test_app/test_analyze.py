@@ -9,7 +9,7 @@ console = Console()
 runner = CliRunner()
 
 
-def test_refactor(template_def_path: Path) -> None:
+def test_report(template_def_path: Path) -> None:
     """Test version call."""
 
     test_package_path = str(template_def_path)
@@ -18,16 +18,8 @@ def test_refactor(template_def_path: Path) -> None:
         app,
         [
             "--dry-run",
-            "refactor",
-            "rename",
-            "--path",
+            "analyze",
             test_package_path,
-            "--module",
-            "test_package/module1",
-            "--old-name",
-            "submodule1",
-            "--new-name",
-            "subMOM",
         ],
         input="",
     )
