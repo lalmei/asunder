@@ -27,10 +27,10 @@ jobs:
                   cache: "poetry-version"
 
             - uses: actions/cache@v4
-            - name: Define a cache for the virtual environment based on the dependencies lock file
+              name: Define a cache for the virtual environment based on the dependencies lock file
               with:
-              path: ./.venv
-              key: venv-${{ hashFiles('poetry.lock') }}
+                  path: ./.venv
+                  key: venv-${{ hashFiles('poetry.lock') }}
 
             - name: Install Dependencies
               run: |
