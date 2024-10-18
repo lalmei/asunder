@@ -10,7 +10,7 @@ jobs:
         strategy:
             matrix:
                 python-version: ["3.11", "3.12"]
-                poetry-version: ["1.2.2"]
+                poetry-version: ["1.8.3"]
                 os: [ubuntu-latest]
             fail-fast: false
         steps:
@@ -25,6 +25,12 @@ jobs:
               with:
                   poetry-version: ${{ matrix.poetry-version }}
                   cache: "poetry-version"
+                  
+            - uses: actions/cache@v3
+            - name: Define a cache for the virtual environment based on the dependencies lock file
+              with:
+              path: ./.venv
+              key: venv-${{ hashFiles('poetry.lock') }}
 
             - name: Install Dependencies
               run: |
