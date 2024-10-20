@@ -122,8 +122,4 @@ class BugFixingCommentsMetric(Metric):
 
     def calculate(self, data: dict[str, Any]) -> float:
         # Counting comments or commit messages that indicate a bug fix
-        return sum(
-            1
-            for comment in data.get("comments", [])
-            if "fix" in comment.lower() or "bug" in comment.lower()
-        )
+        return sum(1 for comment in data.get("comments", []) if "fix" in comment.lower() or "bug" in comment.lower())

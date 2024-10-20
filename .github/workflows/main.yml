@@ -10,21 +10,27 @@ jobs:
         strategy:
             matrix:
                 python-version: ["3.11", "3.12"]
-                poetry-version: ["1.2.2"]
+                poetry-version: ["1.8.3"]
                 os: [ubuntu-latest]
             fail-fast: false
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - name: Set up Python ${{ matrix.python-version }}
               uses: actions/setup-python@v4
               with:
                   python-version: ${{ matrix.python-version }}
 
             - name: Install Poetry
-              uses: abatilo/actions-poetry@v2
+              uses: abatilo/actions-poetry@v3
               with:
                   poetry-version: ${{ matrix.poetry-version }}
                   cache: "poetry-version"
+
+            - uses: actions/cache@v4
+              name: Define a cache for the virtual environment based on the dependencies lock file
+              with:
+                  path: ./.venv
+                  key: venv-${{ hashFiles('poetry.lock') }}
 
             - name: Install Dependencies
               run: |
@@ -53,7 +59,7 @@ jobs:
               with:
                   name: coverage
             - name: Push coverage report
-              uses: paambaati/codeclimate-action@v3.2.0
+              uses: paambaati/codeclimate-action@v9.0.0
               env:
                   CC_TEST_REPORTER_ID: ${{secrets.REPORTER_ID}}
               with:

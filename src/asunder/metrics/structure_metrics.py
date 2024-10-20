@@ -19,9 +19,7 @@ class MethodMetrics(BaseModel):
     length: int = 0
     change_set: ChangeSetMetric = Field(default_factory=ChangeSetMetric)
     code_churn: CodeChurnMetric = Field(default_factory=CodeChurnMetric)
-    bug_fixing_comment: BugFixingCommentsMetric = Field(
-        default_factory=BugFixingCommentsMetric
-    )
+    bug_fixing_comment: BugFixingCommentsMetric = Field(default_factory=BugFixingCommentsMetric)
 
 
 class ClassMetrics(BaseModel):
@@ -36,17 +34,11 @@ class FileMetrics(BaseModel):
     change_set: ChangeSetMetric = Field(default_factory=ChangeSetMetric)
     code_churn: CodeChurnMetric = Field(default_factory=CodeChurnMetric)
     commits_count: CodeChurnMetric = Field(default_factory=CodeChurnMetric)
-    contributors_count: ContributorsCountMetric = Field(
-        default_factory=ContributorsCountMetric
-    )
-    contributors_experience: ContributorsExperienceMetric = Field(
-        default_factory=ContributorsExperienceMetric
-    )
+    contributors_count: ContributorsCountMetric = Field(default_factory=ContributorsCountMetric)
+    contributors_experience: ContributorsExperienceMetric = Field(default_factory=ContributorsExperienceMetric)
     hunks_count: HunksCountMetric = Field(default_factory=HunksCountMetric)
     lines_count: LinesCountMetric = Field(default_factory=LinesCountMetric)
-    bug_fixing_comment: BugFixingCommentsMetric = Field(
-        default_factory=BugFixingCommentsMetric
-    )
+    bug_fixing_comment: BugFixingCommentsMetric = Field(default_factory=BugFixingCommentsMetric)
     classes: dict[str, ClassMetrics] = Field(default_factory=dict)
 
 
