@@ -1,22 +1,7 @@
 # from pydantic import BaseModel, Field
 from typing import Any
 
-from pydantic import BaseModel
-
-
-# Base Metric class with Pydantic
-class Metric(BaseModel):
-    def __init__(self, name):
-        self.name = name
-
-    def calculate(self, **kwargs):
-        pass
-
-    def update(self, **kwargs):
-        pass
-
-    def reset(self):
-        pass
+from asunder.metrics.base_metric import Metric
 
 
 # Specific metric: Change Frequency

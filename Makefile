@@ -18,6 +18,7 @@ output.dir := output
 
 build.wheel := $(dist.dir)/asunder-$(version).tar.gz
 
+include make_cmds/clean.mk
 include make_cmds/poetry.mk
 include make_cmds/quality.mk
 include make_cmds/tests.mk

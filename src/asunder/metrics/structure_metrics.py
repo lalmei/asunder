@@ -2,7 +2,6 @@ from pydantic import BaseModel, Field
 
 from asunder.metrics.process_metrics import (
     ChangeSetMetric,
-    CodeChurnMetric,
     BugFixingCommentsMetric,
     HunksCountMetric,
     LinesCountMetric,
